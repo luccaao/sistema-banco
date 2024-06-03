@@ -1,0 +1,83 @@
+span {
+    color: orangered;
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.info {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(117, 117, 117);
+    margin-bottom: 30px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container-conteudo {
+    margin-top: 20px;
+   width: 40%;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+}
+
+.divisao {
+    display: flex;
+    gap: 10px;
+   justify-content: center;
+
+    width: 100%;
+
+}
+
+mat-card{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.visivel {
+    color: rgb(182, 180, 180);
+    border: none;
+  }
+
+.senha {
+    display: flex;
+    min-width: 150px;
+    max-width: 400px;
+  
+    align-items: center;
+    justify-content: center;
+  }
+
+form{
+    display: flex;
+    flex-direction: column;
+    
+    gap: 10px;
+    padding: 30px;
+    height: 80%;
+    width: 100%;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+form .submit {
+    padding: 15px;
+}

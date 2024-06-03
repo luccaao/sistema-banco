@@ -3,6 +3,7 @@
 <mat-card class="container">
   <mat-card-content class="container-conteudo">
     <span class="login">AREA DE LOGIN</span>
+    <mat-card>
     <form [formGroup]="formUser">
         <mat-form-field>
             <mat-label>Email</mat-label>
@@ -16,8 +17,11 @@
     
           <button (click)="login()" mat-raised-button color="warn">ENTRAR</button>
 
-          <span class="cadastro"> CRIAR CONTA</span>
-          <span class="cadastro"> ESQUECEU SENHA?</span>
+          <div class="actions">
+            <a class="cadastro" routerLink="/cadastro"> CRIAR CONTA</a>
+            <a class="cadastro" routerLink="/esqueceu-senha"> ESQUECEU SENHA?</a>
+          </div>
     </form>
+  </mat-card>
   </mat-card-content>
 </mat-card>

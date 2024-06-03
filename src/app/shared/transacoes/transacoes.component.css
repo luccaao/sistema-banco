@@ -36,3 +36,11 @@ table th {
 .down {
     background-color: #ffcdd2;
 }
+
+.testee1{
+    background-color: aqua;
+}
+
+.testee1:hover {
+    background-color: blue;
+}

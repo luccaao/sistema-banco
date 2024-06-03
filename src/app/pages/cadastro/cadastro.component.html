@@ -1,0 +1,52 @@
+<mat-card class="container">
+  <div class="info">ÁREA DE CADASTRO</div>
+  <mat-card-content class="container-conteudo">
+    <mat-card>
+      <form [formGroup]="formUser">
+        <p class="divisao">
+          <mat-form-field class="example-full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>CPF</mat-label>
+            <input maxlength="11" matInput formControlName="CPF" />
+          </mat-form-field>
+        </p>
+
+        <p class="divisao">
+          <mat-form-field class="senha">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" />
+            <button
+              class="visivel"
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <mat-form-field class="senha">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+        </p>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Sexo</mat-label>
+
+          <mat-select  formControlName="sexo" >
+            <mat-option value="feminino">Feminino</mat-option>
+            <mat-option value="masculino">Masculino</mat-option>
+            <mat-option value="nao_dizer">Prefiro não dizer</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+        <button (click)="submit()" class="submit" mat-raised-button color="warn">CADASTRAR</button>
+      </form>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

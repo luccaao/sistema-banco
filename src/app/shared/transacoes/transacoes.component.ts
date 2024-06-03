@@ -24,6 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class TransacoesComponent {
   user$!: any;
+  conta$!: any;
 
   transacoes: {
     attributes: {
@@ -43,17 +44,23 @@ export class TransacoesComponent {
   ) {}
 
   ngOnInit(): void {
-    if (this.userService.isLogged()) {
-      this.user$ = this.userService.decodificaJWT();
+     if (this.userService.isLogged()) {
+       this.user$ = this.userService.decodificaJWT();
 
-      this.transacaoService
-        .getAllTransacoes(this.user$.id)
-        .subscribe((response: any) => {
-        
-          this.transacoes = response.data.attributes.transacaos.data.reverse()
+       this.userService.getUserId(this.user$.id).subscribe((response: any) => {
+          this.conta$ = response.conta.id;
+                 
           
-          
+          this.transacaoService
+            .getAllTransacoes(this.conta$)
+            .subscribe((response: any) => {
+           
+              this.transacoes = response.data.attributes.transacaos.data.reverse()
+             
+             
+            });
         });
-    }
+
+     }
   }
 }

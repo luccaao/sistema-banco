@@ -11,13 +11,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let transacao of transacoes" 
-                    [ngClass]="{'up': transacao.attributes.tipo === 'DEPÓSITO', 'down': transacao.attributes.tipo === 'SAQUE'}">
-                    <td>{{ transacao.id }}</td>
-                    <td>{{ transacao.attributes.valor | currency:'BRL':true }}</td>
-                    <td>{{ transacao.attributes.tipo }}</td>
-                    <td>{{ transacao.attributes.createdAt | date:'dd/MM/yyyy, HH:mm:ss' }}</td>
-                </tr>
+                
+                  
+                        <tr *ngFor="let transacao of transacoes"
+                            [ngClass]="{'up': transacao.attributes.tipo === 'DEPÓSITO', 'down': transacao.attributes.tipo === 'SAQUE'}">
+                            <td>{{ transacao.id }}</td>
+                            <td>{{ transacao.attributes.valor | currency:'BRL':true }}</td>
+                            <td>{{ transacao.attributes.tipo }}</td>
+                            <td>{{ transacao.attributes.createdAt | date:'dd/MM/yyyy, HH:mm:ss' }}</td>
+                        
+                        </tr>
+                    
+                
             </tbody>
         </table>
     </div>

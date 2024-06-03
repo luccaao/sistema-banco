@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TransacoesService } from './transacoes.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ import { TransacoesService } from './transacoes.service';
 export class BancoService {
   saldoConta = 0;
   user$!: any;
+  conta$!: any;
 
   private API = `http://localhost:1337/api/contas`;
 
@@ -15,23 +17,28 @@ export class BancoService {
 
   constructor(
     private httpClient: HttpClient,
-    private transacaoService: TransacoesService
+    private transacaoService: TransacoesService,
+    private userService: UserService
   ) {}
 
-  getSaldo(id: string, transacao: any) {
-    return this.httpClient
-      .get(`${this.API}/${id}`)
-      .subscribe((response: any) => {
-        this.user$ = id;
+  getSaldo(transacao: any) {
+    this.user$ = this.userService.decodificaJWT();
+    this.user$ = this.user$.id;
 
-        this.saldoConta = parseFloat(response.data.attributes.saldo);
+    this.userService.getUserId(this.user$).subscribe((response: any) => {
+      console.log((this.user$ = response));
+      this.user$ = response.id;
+      this.conta$ = response.conta.id;
+      console.log(this.conta$, this.user$);
 
-        this.fazerTransacao(transacao, id);
-        this.transacaoService.criarTransacao(transacao, id);
-      });
+      this.saldoConta = parseFloat(response.conta.saldo);
+
+      this.fazerTransacao(transacao);
+      this.transacaoService.criarTransacao(transacao, this.conta$);
+    });
   }
 
-  fazerTransacao(transacao: any, id: string) {
+  fazerTransacao(transacao: any) {
     // this.user$ = id
     switch (transacao.categoria) {
       case 'DEPÓSITO':
@@ -42,6 +49,8 @@ export class BancoService {
         return this.transferencia(transacao);
     }
   }
+
+
 
   saque(transacao: any) {
     this.saldoConta -= parseFloat(transacao.valor);
@@ -57,19 +66,19 @@ export class BancoService {
     };
 
     this.httpClient
-      .put(`${this.API}/${this.user$}?populate=*`, data)
+      .put(`${this.API}/${this.conta$}?populate=*`, data)
       .subscribe((response: any) => {
-      
         window.location.reload();
-        
       });
-
   }
+
+
+
 
   deposito(transacao: any) {
     this.saldoConta += parseFloat(transacao.valor);
-    console.log(this.saldoConta);
-    
+
+    console.log(this.saldoConta, this.user$, this.conta$);
 
     const data = {
       data: {
@@ -80,18 +89,16 @@ export class BancoService {
           connect: [this.user$],
         },
         contas: {
-          
-          connect: [this.user$],
-        }
+          connect: [this.conta$],
+        },
       },
     };
 
     this.httpClient
-      .put(`${this.API}/${this.user$}?populate=*`, data)
+      .put(`${this.API}/${this.conta$}?populate=*`, data)
       .subscribe((response: any) => {
         window.location.reload();
       });
-
   }
 
   transferencia(transacao: any) {}

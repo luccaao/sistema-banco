@@ -1,0 +1,14 @@
+<div class="container">
+    <mat-card>
+        <mat-card-content>
+            <div>Alterar role do  <span>{{this.user$.username}} ({{this.user$.role.type}})</span></div>
+            <mat-form-field>
+                <mat-label>Role</mat-label>
+                <mat-select >
+                  <mat-option value="auth">Autenticado</mat-option>
+                  <mat-option value="pub">Público</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+</div>

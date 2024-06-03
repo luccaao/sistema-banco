@@ -17,6 +17,8 @@ import {MatButtonModule } from '@angular/material/button';
 export class HeaderComponent {
 
   isLogged$! : boolean
+  isAuthenticated$! : boolean
+  auth! : string
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -28,7 +30,18 @@ export class HeaderComponent {
     if (this.isLogged$) {
       this.user$ = this.userService.decodificaJWT();
       this.userService.getUserId(this.user$.id).subscribe((response: any) => {
-        console.log(response);
+    
+
+        this.auth = response.role.name
+
+        if (this.auth === 'Authenticated') {
+          this.isAuthenticated$ = true;
+  
+          
+        } else {
+          this.isAuthenticated$ = false
+        }
+        
         
         this.user$ = response;
         

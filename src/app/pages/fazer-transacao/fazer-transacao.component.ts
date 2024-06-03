@@ -73,7 +73,7 @@ export class FazerTransacaoComponent {
 
   fazerTransacao() {
   
-    this.bancoService.getSaldo(this.user$.id, this.formTransacao.value,)
+    this.bancoService.getSaldo(this.formTransacao.value,)
 
  
 }

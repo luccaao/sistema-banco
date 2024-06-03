@@ -13,14 +13,15 @@ button{
     align-items: center;
     width: 100%;
     gap: 10px;
-    justify-content: space-between;
+    justify-content: space-around;
+  
     
 }
 
 .actions{
     display: flex;
-
-   gap: 20px;
+    justify-content: space-around;
+    gap: 20px;
     width: 18%;
 }
 
@@ -63,4 +64,10 @@ button{
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+mat-toolbar{
+    display: flex;
+    z-index: 999;
+    justify-content: space-around;
 }

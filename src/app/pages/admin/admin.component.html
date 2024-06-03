@@ -1,0 +1,33 @@
+<mat-card>
+  <div class="info">
+    <span>{{ this.user$.username }}</span
+    >, bem-vindo à área administrativa do seu banco.
+  </div>
+
+  <mat-card-content>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Saldo</th>
+          <th>CPF</th>
+          <th>Sexo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr (click)="teste(user.id)" *ngFor="let user of users$">
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role.type }}</td>
+
+          <td>{{ user.conta.saldo | currency : "BRL" : true }}</td>
+
+          <td>{{ user.CPF}}</td>
+          <td>{{ user.sexo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>

@@ -3,15 +3,23 @@
     <span routerLink="/home">Meu <span class="title">banco</span></span>
 
     <button routerLink="/minha-conta" mat-raised-button class="botao--flex">
+      
       <mat-icon class="user"> account_circle </mat-icon>
-      <span class="dinheiro">R$</span>
-      {{ user$.conta.saldo }}
+      <div *ngIf="!isAuthenticated$">
+        
+        <span class="dinheiro"></span>
+        {{ user$.conta.saldo | currency:'BRL':true }}
+      </div>
+
     </button>
 
     <div class="actions">
-      <button class="transacao" mat-raised-button color="primary" routerLink="nova-transacao">
-        Fazer transação
-      </button>
+      <div *ngIf="isAuthenticated$; else naoAutenticado" >
+      
+        <button class="transacao" mat-raised-button color="primary" routerLink="/admin"> Area administrativa</button>
+      
+    </div>
+
       <button class="logout" mat-raised-button color="warn" (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
@@ -21,4 +29,15 @@
   <ng-template #login>
     <span class="centralizar" routerLink="/home">Meu <span class="title">banco</span></span>
   </ng-template>
+
+  
+  <ng-template #naoAutenticado>
+    <button class="transacao" mat-raised-button color="primary" routerLink="nova-transacao">
+      Fazer transação
+    </button>
+  </ng-template>
+  
 </mat-toolbar>
+
+
+<

@@ -13,7 +13,7 @@ export class TransacoesService {
   constructor(private httpClient: HttpClient) {}
 
   getAllTransacoes(id: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.API}/${id}?populate=*`);
+     return this.httpClient.get<any>(`${this.API}/${id}?populate=*`);
   }
 
   criarTransacao(transacao: any, id: string) {
