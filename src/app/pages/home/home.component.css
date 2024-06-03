@@ -1,0 +1,19 @@
+
+
+.teste {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 90%;
+    height: 100%;
+      
+}
+
+h1 {
+   font-weight: bold; 
+}
+
+span {
+    color: orangered;
+}

@@ -1,0 +1,66 @@
+mat-icon {
+    color: white;
+    
+    
+}
+
+button{
+    width: 50%;
+}
+
+.teste{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    justify-content: space-between;
+    
+}
+
+.actions{
+    display: flex;
+
+   gap: 20px;
+    width: 18%;
+}
+
+.user {
+    color: black;
+    font-weight: bold;
+    
+}
+
+.dinheiro{
+    color: green;
+    font-weight: bold;
+}
+
+.title {
+    color: orangered;
+    font-size: 30px;
+    text-decoration:line-through;
+}
+
+.logout{
+    width: 5%;
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+}
+
+.transacao{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.centralizar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}

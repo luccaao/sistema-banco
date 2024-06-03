@@ -1,0 +1,49 @@
+.visivel {
+  color: rgb(182, 180, 180);
+  border: none;
+}
+
+.senha {
+  display: flex;
+  min-width: 150px;
+  max-width: 400px;
+
+  align-items: center;
+  justify-content: center;
+}
+mat-card {
+    margin-top: 5%;
+    padding: 30px;
+    
+}
+
+mat-card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+span {
+    color: orangered;
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.info {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(117, 117, 117);
+    margin-bottom: 30px;
+}
+
+.divisao{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+mat-form-field {
+    width: 400px;
+}

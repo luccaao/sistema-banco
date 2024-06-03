@@ -1,0 +1,52 @@
+<mat-card>
+  <div class="info">
+    <span>{{ this.user$.username }}</span
+    >, suas informações estão todas aqui!
+  </div>
+  <mat-card-content>
+     
+          <p class="divisao">
+              <mat-form-field class="example-full-width">
+                <mat-label>Nome</mat-label>
+                <input matInput [(ngModel)]="usuario.nome" [(ngModel)]="user$.username"/>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>CPF</mat-label>
+                <input maxlength="11" matInput [(ngModel)]="usuario.cpf" [(ngModel)]="user$.CPF" />
+              </mat-form-field>
+          </p>
+       
+
+    <p class="divisao">
+      <mat-form-field class="senha">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="usuario.password" [type]="hide ? 'password' : 'text'" />
+        <button
+          class="visivel"
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="senha">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="usuario.email"  [(ngModel)]="user$.email"/>
+    
+      </mat-form-field>
+    </p>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Sexo</mat-label>
+      <mat-select  [(ngModel)]="usuario.sexo"  [(ngModel)]="user$.sexo">
+        <mat-option value="feminino">Feminino</mat-option>
+        <mat-option value="masculino">Masculino</mat-option>
+        <mat-option value="nao_dizer">Prefiro não dizer</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button (click)="alterarDados()" mat-raised-button>ALTERAR INFORMAÇÕES</button>
+  </mat-card-content>
+</mat-card>

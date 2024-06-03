@@ -1,0 +1,48 @@
+
+<mat-card>
+  
+<form [formGroup]="formTransacao">
+  <mat-form-field>
+    <mat-label>Tipo de transação</mat-label>
+    <mat-select
+      formControlName="categoria"
+      (change)="onCategoriaChange($event)"
+    >
+      <mat-option
+        *ngFor="let categoria of categorias"
+        [value]="categoria.value"
+        >{{ categoria.viewValue }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Valor</mat-label>
+    <input matInput formControlName="valor">
+  </mat-form-field>
+
+  <div
+    *ngIf="
+      formTransacao.get('categoria')?.value !== 'TRANSFERÊNCIA';
+      else transferencias
+    "
+  ></div>
+
+  <ng-template #transferencias>
+    <mat-form-field>
+      <mat-label>Conta destino</mat-label>
+      <input matInput  formControlName="numeroConta"/>
+    </mat-form-field>
+  </ng-template>
+
+  <!-- <div *ngIf="expression;else templateName" ></div> -->
+
+  <button mat-raised-button color="warn" (click)="fazerTransacao()">FAZER TRANSAÇÃO</button>
+</form>
+<hr>
+</mat-card>
+
+<section>
+  <app-transacoes></app-transacoes>
+</section>
+

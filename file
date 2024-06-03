@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="container-conteudo">
+        <mat-card *ngFor="let transacao of transacoes" 
+                  [ngClass]="{'up': transacao.attributes.tipo === 'DEPÓSITO', 'down': transacao.attributes.tipo === 'SAQUE'}">
+            <mat-card-content>
+                <p>Valor: <strong>R${{ transacao.attributes.valor }}</strong></p>
+                <p>Tipo de transação: <strong>{{ transacao.attributes.tipo }}</strong></p>
+                <p>
+                    Data da transação: <strong>{{ transacao.attributes.createdAt }}</strong>
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+form {
+    display: flex;
+    padding: 15px;
+    padding-top: 30px;
+    gap: 10px;
+    align-items: center;
+}
+
+button {
+    margin-left: 10px;
+    
+}
+
+hr {
+    width: 100%;
+    border: 1px solid rgb(204, 203, 203);
+}
