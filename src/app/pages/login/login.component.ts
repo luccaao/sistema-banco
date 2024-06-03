@@ -33,6 +33,8 @@ export class LoginComponent {
 
 
 login() {
+  console.log(this.formUser.value as UsuarioLogin);
+  
   this.authService.onlogin(this.formUser.value as UsuarioLogin);
 }
 
