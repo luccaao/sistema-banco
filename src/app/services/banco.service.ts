@@ -1,19 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TransacoesService } from './transacoes.service';
 import { UserService } from './user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BancoService {
   saldoConta = 0;
+  saldoTransferencia = 0;
   user$!: any;
   conta$!: any;
 
   private API = `http://localhost:1337/api/contas`;
 
   private APItransacao = 'http://localhost:1337/api/transacoes';
+
+  matSnackBar = inject(MatSnackBar);
 
   constructor(
     private httpClient: HttpClient,
@@ -34,7 +38,6 @@ export class BancoService {
       this.saldoConta = parseFloat(response.conta.saldo);
 
       this.fazerTransacao(transacao);
-      this.transacaoService.criarTransacao(transacao, this.conta$);
     });
   }
 
@@ -50,30 +53,38 @@ export class BancoService {
     }
   }
 
-
-
   saque(transacao: any) {
-    this.saldoConta -= parseFloat(transacao.valor);
+    if (this.saldoConta > transacao.valor) {
+      this.saldoConta -= parseFloat(transacao.valor);
 
-    const data = {
-      data: {
-        saldo: this.saldoConta,
+      const data = {
+        data: {
+          saldo: this.saldoConta,
 
-        user: {
-          connect: [this.user$],
+          user: {
+            connect: [this.user$],
+          },
         },
-      },
-    };
+      };
 
-    this.httpClient
-      .put(`${this.API}/${this.conta$}?populate=*`, data)
-      .subscribe((response: any) => {
-        window.location.reload();
+      this.httpClient
+        .put(`${this.API}/${this.conta$}?populate=*`, data)
+        .subscribe((response: any) => {
+          this.matSnackBar.open('Saque realizado com sucesso', 'Fechar', {
+            duration: 2000,
+          });
+
+          this.matSnackBar._openedSnackBarRef?.onAction().subscribe(() => {
+            window.location.reload();
+          });
+        });
+      this.transacaoService.criarTransacao(transacao, this.conta$, 'SAQUE');
+    } else {
+      this.matSnackBar.open('Saldo insuficiente', 'Fechar', {
+        duration: 2000,
       });
+    }
   }
-
-
-
 
   deposito(transacao: any) {
     this.saldoConta += parseFloat(transacao.valor);
@@ -99,7 +110,68 @@ export class BancoService {
       .subscribe((response: any) => {
         window.location.reload();
       });
+    this.transacaoService.criarTransacao(transacao, this.conta$, 'DEPÓSITO');
   }
 
-  transferencia(transacao: any) {}
+  transferencia(transacao: any) {
+    if (this.saldoConta > transacao.valor) {
+      const transacaoE = `TRANSFERÊNCIA ENVIADA PARA CONTA:' ${transacao.numeroConta}`
+      this.transacaoService.criarTransacao(
+        transacao,
+        this.conta$,
+        transacaoE
+      );
+      this.saldoConta -= parseFloat(transacao.valor);
+
+      const data = {
+        data: {
+          saldo: this.saldoConta,
+
+          user: {
+            connect: [this.user$],
+          },
+        },
+      };
+
+      this.httpClient
+        .put(`${this.API}/${this.conta$}?populate=*`, data)
+        .subscribe((response: any) => {});
+
+      this.userService.getAllUsers().subscribe((response: any) => {
+        response.forEach((element: any) => {
+          if (element.conta.numero == transacao.numeroConta) {
+            this.saldoTransferencia = parseFloat(element.conta.saldo);
+            this.saldoTransferencia += parseFloat(transacao.valor);
+            const dataTRANS = {
+              data: {
+                saldo: this.saldoTransferencia,
+
+                conta: {
+                  connect: [element.id],
+                },
+              },
+            };
+
+            this.httpClient
+              .put(`${this.API}/${element.conta.id}?populate=*`, dataTRANS)
+              .subscribe((response: any) => {
+                const transacaoR = `TRANSFERÊNCIA RECEBIDA DA CONTA:  ${this.conta$}`;
+                this.transacaoService.criarTransacao(
+                  transacao,
+                  element.conta.id,
+                  transacaoR
+                );
+                window.location.reload();
+              });
+          } else {
+            console.log('Conta não encontrada');
+          }
+        });
+      });
+    } else {
+      this.matSnackBar.open('Saldo insuficiente', 'Fechar', {
+        duration: 2000,
+      });
+    }
+  }
 }

@@ -72,6 +72,7 @@ export class FazerTransacaoComponent {
   }
 
   fazerTransacao() {
+  console.log(this.formTransacao.value);
   
     this.bancoService.getSaldo(this.formTransacao.value,)
 

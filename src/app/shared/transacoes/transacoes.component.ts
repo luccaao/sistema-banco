@@ -7,6 +7,7 @@ import { TransacoesService } from '../../services/transacoes.service';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-transacoes',
@@ -18,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
     MatFormFieldModule,
     CommonModule,
     MatCardModule,
+    MatButtonModule
   ],
   templateUrl: './transacoes.component.html',
   styleUrl: './transacoes.component.css',

@@ -8,7 +8,8 @@ import { AuthService } from '../../services/auth.service';
 import { UsuarioLogin } from '../../types/Usuario.model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -25,9 +26,16 @@ export class LoginComponent {
       })
 
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
     ngOnInit(): void {
+      if (!this.userService.isLogged()) {
+        this.router.navigate(['/']);
+      } else {
+        this.router.navigate(['/home']);
+  
+      }
+      
 
     }
 

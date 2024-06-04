@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TokenService } from './token.service';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -19,10 +20,14 @@ export class UserService {
     private httpClient: HttpClient
   ) {}
 
+  matSnakerBar = inject(MatSnackBar);
+
 
 
   isLogged() {
-    return this.tokenService.hasToken();
+     const logado =  this.tokenService.hasToken();
+     return logado
+  
   }
 
   onLogout() {
@@ -43,29 +48,36 @@ export class UserService {
   updateUser(
     id: any,
     usuario: {
-      nome: string;
+      username: string;
       email: string;
-      cpf: string;
+      CPF: string;
       sexo: string;
       password: string;
+      
     }
   ) {
     const data = {
-      data: {
-        username: usuario.nome,
+      
+        username: usuario.username,
         email: usuario.email,
-        CPF: usuario.cpf,
+        CPF: usuario.CPF,
         sexo: usuario.sexo,
         password: usuario.password,
-      },
+        
+      
     };
+    
 
-    this.httpClient
-      .put(`${this.API}/${id}`, data)
-      .subscribe((response: any) => {
-        console.log(response);
-      });
+     this.httpClient
+       .put(`${this.API}/${id}`, data)
+       .subscribe((response: any) => {
+          this.matSnakerBar.open('Dados alterados com sucesso', 'Fechar', {
+            duration: 2000,
+          });
+       });
   }
+
+
 
   criarConta(conta: any) {
     console.log(conta.user.id);

@@ -9,6 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 @Component({
   selector: 'app-minha-conta',
@@ -23,34 +25,28 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatSelectModule,
     MatButtonModule,
+    DialogComponent
   ],
   templateUrl: './minha-conta.component.html',
   styleUrl: './minha-conta.component.css',
 })
 export class MinhaContaComponent {
-
   hide = true;
   user$!: any;
 
-
-  usuario : {
-    nome: string;
-    email: string;
-    cpf: string;
-    sexo: string;
-    password: string;
-  } = {
-    nome: '',
+  usuario = {
+    username: '',
     email: '',
-    cpf: '',
+    CPF: '',
     sexo: '',
-    password: ''
-  }
-  
+    password: '',
+  };
 
-  
-
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     if (!this.userService.isLogged()) {
@@ -63,11 +59,9 @@ export class MinhaContaComponent {
     });
   }
 
-   alterarDados() {
-     console.log(this.usuario);
-      this.userService.updateUser(this.user$.id, this.usuario)
-     
-   }
+  alterarDados() {
+    this.userService.updateUser(this.user$.id, this.usuario);
+  }
 
-  
+
 }

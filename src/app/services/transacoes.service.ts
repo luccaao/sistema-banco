@@ -16,13 +16,13 @@ export class TransacoesService {
      return this.httpClient.get<any>(`${this.API}/${id}?populate=*`);
   }
 
-  criarTransacao(transacao: any, id: string) {
+  criarTransacao(transacao: any, id: string, tipoC: string) {
     
 
     const connect_body = {
       data: {
         valor: transacao.valor,
-        tipo: transacao.categoria,
+        tipo: tipoC,
         users: {
           connect: [id],
         },

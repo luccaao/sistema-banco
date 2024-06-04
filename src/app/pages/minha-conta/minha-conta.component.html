@@ -8,11 +8,11 @@
           <p class="divisao">
               <mat-form-field class="example-full-width">
                 <mat-label>Nome</mat-label>
-                <input matInput [(ngModel)]="usuario.nome" [(ngModel)]="user$.username"/>
+                <input matInput [(ngModel)]="usuario.username" [(ngModel)]="user$.username"/>
               </mat-form-field>
               <mat-form-field class="example-full-width">
                 <mat-label>CPF</mat-label>
-                <input maxlength="11" matInput [(ngModel)]="usuario.cpf" [(ngModel)]="user$.CPF" />
+                <input maxlength="11" matInput [(ngModel)]="usuario.CPF" [(ngModel)]="user$.CPF" />
               </mat-form-field>
           </p>
        
@@ -39,14 +39,23 @@
       </mat-form-field>
     </p>
 
+    <p class="divisao">
     <mat-form-field class="example-full-width">
       <mat-label>Sexo</mat-label>
-      <mat-select  [(ngModel)]="usuario.sexo"  [(ngModel)]="user$.sexo">
+      <mat-select  [(ngModel)]="usuario.sexo" >
         <mat-option value="feminino">Feminino</mat-option>
         <mat-option value="masculino">Masculino</mat-option>
         <mat-option value="nao_dizer">Prefiro não dizer</mat-option>
       </mat-select>
     </mat-form-field>
-    <button (click)="alterarDados()" mat-raised-button>ALTERAR INFORMAÇÕES</button>
+
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Numero da sua conta</mat-label>
+      <input disabled matInput  [(ngModel)]="user$.conta.numero" />
+    </mat-form-field>
+  </p>
+    <button (click)="alterarDados()"  mat-raised-button>ALTERAR INFORMAÇÕES</button>
+    
   </mat-card-content>
 </mat-card>
