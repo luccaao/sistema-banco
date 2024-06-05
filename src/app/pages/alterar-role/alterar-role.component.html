@@ -1,7 +1,7 @@
 <div class="container">
-    <mat-card>
+    <mat-card style="padding: 50px;">
         <mat-card-content>
-            <div>Alterar role do  <span>{{this.user$.username}} ({{this.user$.role.type}})</span></div>
+            <div style="color: rgb(168, 166, 166); font-weight: bold;">Alterar role do  <span  style="font-size: 18px;">{{this.user$.username}} ({{this.user$.role.type}})</span></div>
             <mat-form-field>
                 <mat-label>Role</mat-label>
                 <mat-select >
@@ -10,5 +10,11 @@
                 </mat-select>
               </mat-form-field>
         </mat-card-content>
+
+        <div style="display: flex; gap: 5px; flex-direction: column; justify-content: center; align-items: center;">
+          <button  color="primary"  mat-raised-button style="font-weight: bold; width: 80%;">TROCAR ROLE</button>
+          <button (click)="openDialog()"  mat-raised-button style="font-weight: bold; width: 80%;">VER FATURAS</button>
+        </div>
+
       </mat-card>
 </div>

@@ -10,6 +10,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class UserService {
+  alterarRole(id: any, user$: any) {
+    throw new Error('Method not implemented.');
+  }
   private API = 'http://localhost:1337/api/users';
   private APIregister = 'http://localhost:1337/api/auth/local/register';
   private APIconta = 'http://localhost:1337/api/contas';

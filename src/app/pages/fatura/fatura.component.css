@@ -1,0 +1,50 @@
+.select-container {
+   box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items:    center;
+  }
+  
+  .total-value {
+    width: auto;
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+  }
+
+  mat-form-field{
+    width: auto;
+  }
+  
+  .table-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .transaction-table {
+    width: 63%;
+    border-collapse: collapse;
+  }
+  
+  .table-header {
+    background-color: #f0f0f0;
+  }
+  
+  .table-cell {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: start;
+  }
+
+  .transaction-deposit {
+    color: green;
+  }
+  
+  .transaction-withdrawal,
+  .transaction-transfer {
+    color: red;
+  }
+
+ 

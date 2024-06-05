@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { TransacoesService } from './transacoes.service';
 import { UserService } from './user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,8 @@ export class BancoService {
   saldoTransferencia = 0;
   user$!: any;
   conta$!: any;
+
+  private APIuser = 'http://localhost:1337/api/users';
 
   private API = `http://localhost:1337/api/contas`;
 
@@ -116,7 +119,7 @@ export class BancoService {
 
   transferencia(transacao: any) {
     if (this.saldoConta > transacao.valor) {
-      const transacaoE = `TRANSFERÊNCIA ENVIADA PARA CONTA:' ${transacao.numeroConta}`;
+      const transacaoE = `TRANSFERÊNCIA ENVIADA PARA CONTA: ${transacao.numeroConta}`;
       this.transacaoService.criarTransacao(transacao, this.conta$, transacaoE);
       this.saldoConta -= parseFloat(transacao.valor);
 
@@ -173,10 +176,7 @@ export class BancoService {
     }
   }
 
-  fatura() {
-    this.user$ = this.userService.decodificaJWT();
-    this.userService.getUserId(this.user$.id).subscribe((response: any) => {
-      console.log(response);
-    });
+  fatura(user : any) {
+    return this.httpClient.get(`${this.APIuser}/${user}?populate=*`)
   }
 }

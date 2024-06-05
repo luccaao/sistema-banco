@@ -4,11 +4,14 @@ import { MatCardModule } from '@angular/material/card';
 import { UserService } from '../../services/user.service';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 @Component({
   selector: 'app-alterar-role',
   standalone: true,
-  imports: [MatCardModule, MatInputModule, MatSelectModule, CommonModule],
+  imports: [MatCardModule, MatInputModule, MatSelectModule, CommonModule, MatButtonModule],
   templateUrl: './alterar-role.component.html',
   styleUrl: './alterar-role.component.css',
 })
@@ -17,7 +20,7 @@ export class AlterarRoleComponent {
 
   user$: any;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.id = localStorage.getItem('id');
@@ -27,5 +30,16 @@ export class AlterarRoleComponent {
       this.user$ = response;
       console.log(this.user$);
     });
+  }
+
+  openDialog() {
+    this.dialog.open(DialogComponent, {
+      width: '80%',
+      height: '80%'
+    });
+  }
+
+  alterarRole() {
+    this.userService.alterarRole(this.id, this.user$)
   }
 }

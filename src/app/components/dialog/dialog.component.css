@@ -1,44 +1,50 @@
-.actions {
-    display: flex;
-    justify-content: start;
-    gap: 10px;
-    padding: 10px;
-    width: 80%;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-button {
-    width: 50%;
-}
-
-
-p {
-    font-weight: bold;
-    font-size: 18px;
-    
-}
-
-.no {
-    background-color: red;
-    color: white;
-}
-
-mat-card {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    align-items: center;
-}
-
-mat-card-content {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    width: 60%;
-    flex-direction: column;
-    height: 100%;
-    gap: 30px;
-}
+.select-container {
+    box-sizing: border-box;
+     width: 100%;
+     display: flex;
+     justify-content: space-around;
+     align-items:    center;
+   }
+   
+   .total-value {
+     width: auto;
+     font-size: 20px;
+     font-family: "Poppins", sans-serif;
+     font-weight: bold;
+   }
+ 
+   mat-form-field{
+     width: auto;
+   }
+   
+   .table-container {
+     width: 100%;
+     display: flex;
+     justify-content: center;
+   }
+   
+   .transaction-table {
+     width: 63%;
+     border-collapse: collapse;
+   }
+   
+   .table-header {
+     background-color: #f0f0f0;
+   }
+   
+   .table-cell {
+     padding: 10px;
+     border: 1px solid #ddd;
+     text-align: start;
+   }
+ 
+   .transaction-deposit {
+     color: green;
+   }
+   
+   .transaction-withdrawal,
+   .transaction-transfer {
+     color: red;
+   }
+ 
+  
