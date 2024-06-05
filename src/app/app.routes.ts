@@ -7,6 +7,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { EsqueciSenhaComponent } from './pages/esqueci-senha/esqueci-senha.component';
 import { AlterarRoleComponent } from './pages/alterar-role/alterar-role.component';
+import { FaturaComponent } from './pages/fatura/fatura.component';
 
 export const routes: Routes = [
 
@@ -41,6 +42,10 @@ export const routes: Routes = [
     {
         path: 'alterar-role',
         component: AlterarRoleComponent
+    },
+    {
+        path: "fatura",
+        component: FaturaComponent
     }
 
 ];

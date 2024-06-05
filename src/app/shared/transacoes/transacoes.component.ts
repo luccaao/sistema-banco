@@ -8,6 +8,8 @@ import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { FaturaComponent } from '../../pages/fatura/fatura.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-transacoes',
@@ -19,12 +21,16 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     CommonModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterLink
   ],
   templateUrl: './transacoes.component.html',
   styleUrl: './transacoes.component.css',
 })
 export class TransacoesComponent {
+verFatura() {
+throw new Error('Method not implemented.');
+}
   user$!: any;
   conta$!: any;
 

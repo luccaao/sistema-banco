@@ -70,6 +70,7 @@ export class BancoService {
       this.httpClient
         .put(`${this.API}/${this.conta$}?populate=*`, data)
         .subscribe((response: any) => {
+          this.transacaoService.criarTransacao(transacao, this.conta$, 'SAQUE');
           this.matSnackBar.open('Saque realizado com sucesso', 'Fechar', {
             duration: 2000,
           });
@@ -78,7 +79,6 @@ export class BancoService {
             window.location.reload();
           });
         });
-      this.transacaoService.criarTransacao(transacao, this.conta$, 'SAQUE');
     } else {
       this.matSnackBar.open('Saldo insuficiente', 'Fechar', {
         duration: 2000,
@@ -94,33 +94,30 @@ export class BancoService {
     const data = {
       data: {
         saldo: this.saldoConta,
-
         user: {
-          id: this.user$,
+         
           connect: [this.user$],
         },
-        contas: {
-          connect: [this.conta$],
-        },
+        
       },
     };
 
     this.httpClient
       .put(`${this.API}/${this.conta$}?populate=*`, data)
       .subscribe((response: any) => {
+        this.transacaoService.criarTransacao(
+          transacao,
+          this.conta$,
+          'DEPÓSITO'
+        );
         window.location.reload();
       });
-    this.transacaoService.criarTransacao(transacao, this.conta$, 'DEPÓSITO');
   }
 
   transferencia(transacao: any) {
     if (this.saldoConta > transacao.valor) {
-      const transacaoE = `TRANSFERÊNCIA ENVIADA PARA CONTA:' ${transacao.numeroConta}`
-      this.transacaoService.criarTransacao(
-        transacao,
-        this.conta$,
-        transacaoE
-      );
+      const transacaoE = `TRANSFERÊNCIA ENVIADA PARA CONTA:' ${transacao.numeroConta}`;
+      this.transacaoService.criarTransacao(transacao, this.conta$, transacaoE);
       this.saldoConta -= parseFloat(transacao.valor);
 
       const data = {
@@ -129,6 +126,7 @@ export class BancoService {
 
           user: {
             connect: [this.user$],
+            
           },
         },
       };
@@ -173,5 +171,12 @@ export class BancoService {
         duration: 2000,
       });
     }
+  }
+
+  fatura() {
+    this.user$ = this.userService.decodificaJWT();
+    this.userService.getUserId(this.user$.id).subscribe((response: any) => {
+      console.log(response);
+    });
   }
 }

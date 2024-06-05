@@ -15,3 +15,17 @@ hr {
     width: 100%;
     border: 1px solid rgb(204, 203, 203);
 }
+
+section {
+    display: flex;
+    flex-direction: column;
+   
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgb(204, 203, 203);
+    border-radius: 5px;
+}
+
+section button {
+    margin-top: 20px;
+}
