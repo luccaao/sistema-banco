@@ -1,0 +1,149 @@
+<mat-card class="container-shopping">
+  <mat-card-content class="conteudo-container-shopping">
+    <div
+      style="
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        
+      "
+    >
+      <div
+        style="
+          width: 100%;
+        margin-top: 5%;
+          display: flex;
+          justify-content: center;
+        "
+      >
+        <input
+          placeholder="O que você procura?"
+         
+        />
+      </div>
+
+      <div style="display: flex; justify-content: end; width: 5%; margin-top: 5%;">
+        <mat-icon
+          style="
+            color: tomato;
+            font-size: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            justify-self: self-end;
+            align-self: center;
+          "
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+          class="example-sidenav-content"
+          >shopping_cart</mat-icon
+        >
+      </div>
+    </div>
+    </mat-card-content>
+
+  <section>
+    <h2 style="text-align: center; margin-top: 5% ;margin-right: 5%; font-weight: 100;">OS MELHORES PRODUTOS</h2>
+
+    <div style="display: flex; flex-direction: row; gap: 50px;">
+      <div style="width: 100%;" *ngFor="let item of produtos">
+        <mat-card
+          style="
+            display: flex;
+            width: 370px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            padding: 15px;
+            height: auto;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+              width: 100px;
+            "
+          >
+<div style=" width: 100%; height: 350px; display: flex; justify-content: center; align-items: center;">
+  
+              <img
+                style="width: 280px; height: 250px; border-radius: 8px"
+                src="{{ item.attributes.imagem }}"
+              />
+</div>
+
+            <span style="font-size: 20px; font-weight: bold">{{
+              item.attributes.valor | currency: "BRL"
+            }}</span>
+          </div>
+          <div style="display: flex; align-items: center; margin-top: 2%;">
+            <span style="font-size: 10px">{{ item.attributes.nome }}</span>
+          </div>
+          <button
+      
+          >
+            <mat-icon >add</mat-icon>
+          </button>
+        </mat-card>
+      </div>
+    </div>
+
+  </section>
+
+
+</mat-card>
+
+
+
+<div
+  class="offcanvas offcanvas-end"
+  tabindex="-1"
+  id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel"
+>
+  <div class="offcanvas-header">
+    <h2 id="offcanvasRightLabel">Seu carrinho de compras!</h2>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+      style="width: 25px; color: white; height: 25px;"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="list-group" style="gap: 30px; height: 70vh;">
+      <li class="list-group-item" *ngFor="let item of cartItems" style="width: 100%; height: 100px; ">
+        <div style="display: flex; justify-content: space-between; flex-direction: row; align-items: center; gap: 20px;">
+      
+          <span style="width: 100px; height: 90px; display: flex; justify-content: center; align-items: center;">
+            <img style="width: 50%; height: auto;" src="{{ item.imagem }}"/>
+          </span>
+      
+          <div style="display: flex; flex-direction: column;">
+            <span style="font-weight: bold; color: rgb(185, 183, 183);">{{ item.nome }}</span>
+            <span style="font-weight: bold;">{{ item.valor | currency: "BRL" }}</span>
+          </div>
+      
+          <!-- Adicionando ícones de aumentar e diminuir a quantidade -->
+          
+      
+          <!-- Adicionando ícone para remover o item -->
+            <mat-icon style="color: black;">delete</mat-icon>
+          
+      
+        </div>
+      </li>
+    </ul>
+    <h2 style="margin-top: 3%;">TOTAL A PAGAR: <span>{{ totalCarrinho | currency: "BRL" }}</span></h2>
+    
+    <button
+      (click)="finalizarCompra()"
+      mat-raised-button color="warn"
+      style="width: 100%; margin-top: 1%;" class="finale">Finalizar compra</button>
+
+
+  </div>
+</div>

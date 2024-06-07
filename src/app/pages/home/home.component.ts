@@ -3,11 +3,12 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { ShoppingComponent } from '../../components/shopping/shopping.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ProdutosComponent } from '../../components/produtos/produtos.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ShoppingComponent, MatIconModule],
+  imports: [ShoppingComponent, MatIconModule, ProdutosComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

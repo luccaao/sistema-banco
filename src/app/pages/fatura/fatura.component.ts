@@ -12,8 +12,8 @@ import { RouterLink } from '@angular/router';
 import jsPDF from 'jspdf';
 import { HeaderComponent } from '../../shared/header/header.component';
 
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { format } from 'date-fns';
 
@@ -39,14 +39,12 @@ declare const html2pdf: any;
     MatButtonModule,
     NgxPrintModule,
     RouterLink,
-    HeaderComponent
+    HeaderComponent,
   ],
   templateUrl: './fatura.component.html',
   styleUrls: ['./fatura.component.css'],
 })
 export class FaturaComponent {
-
-
   user$!: any;
   transacao$!: Transacao[];
   totalValue: number = 0;
@@ -78,7 +76,7 @@ export class FaturaComponent {
       let filteredTransactions = this.transacao$.filter(
         (transacao) => transacao.day === selectedDay
       );
-      
+
       this.totalValue = filteredTransactions.reduce((sum, transacao) => {
         return sum + Number(transacao.valor);
       }, 0);
@@ -87,13 +85,9 @@ export class FaturaComponent {
     });
   }
 
-
-
   // gerarPDF(): void {
   //   const tabela = document.getElementById('fatura');
-    
 
-  
   //   const opt = {
   //     margin: [10,10,10,10],
   //     filename: 'meubanco.pdf',
@@ -101,19 +95,20 @@ export class FaturaComponent {
   //     html2canvas: { scale: 2 },
   //     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   //   };
-  
+
   //   // New Promise-based usage:
   //   html2pdf().set(opt).from(tabela).save();
   // }
 
-
-
   public export(): void {
+
+    
     // Mapeie a transação para um formato que a tabela possa usar
-    const body = this.transacao$.map(t => [
+    const body = this.transacao$.map((t) => [
       format(new Date(t.createdAt), 'dd/MM/yyyy'), // Formatar data para o padrão brasileiro
       t.tipo,
-      this.formatarMoeda(t.valor) // Formatar valor para moeda brasileira
+      this.formatarMoeda(t.valor),
+       // Formatar valor para moeda brasileira
     ]);
   
     // Adicione os cabeçalhos à primeira linha
@@ -122,58 +117,81 @@ export class FaturaComponent {
     const docDefinition = {
       content: [
         {
-          text: 'MeuBanco',
-          style: 'header',
-          alignment: 'center'
+          columns: [
+            {
+              text: [
+                { text: 'Meu', style: 'normalText' }, // Parte normal do texto
+                { text: 'Banco', style: ['header', 'redText', 'lineThrough'] }, // Parte estilizada
+              ],
+              alignment: 'start',
+            },
+            {
+              text: '', // Coluna invisível
+              width: 280, // Preenchendo o restante do espaço
+              alignment: 'end',
+            },
+            {
+              qr: 'Fatura meuBanco',
+              fit: '70', // Tamanho do QR code
+              alignment: 'end', // Alinha o QR code com o texto à direita
+            },
+          ],
         },
         {
           text: 'Fatura',
           style: 'subheader',
-          alignment: 'center'
+          alignment: 'start',
         },
         {
           style: 'tableExample',
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*'],
-            body: body
+            widths: ['*', '*', '*', 20], // Adicionando uma coluna invisível para o QR code
+            body: body,
           },
           layout: {
-            fillColor: function (rowIndex:any , node:any, columnIndex:any) {
-              return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
-            }
-          }
-        }
+            fillColor: function (rowIndex: any, node: any, columnIndex: any) {
+              return rowIndex % 2 === 0 ? '#CCCCCC' : null;
+            },
+          },
+        },
       ],
-  
       styles: {
+        normalText: {
+          fontSize: 23,
+          bold: true,
+          margin: [0, 0, 0, 10],
+        },
         header: {
-          fontSize: 18,
+          fontSize: 23,
           bold: true,
-          margin: [0, 0, 0, 10]
+          margin: [0, 0, 0, 10],
         },
-        subheader: {
-          fontSize: 16,
-          bold: true,
-          margin: [0, 10, 0, 5]
+        redText: {
+          color: 'tomato',
         },
-        tableExample: {
-          margin: [0, 5, 0, 15]
-        }
-      }
+        lineThrough: {
+          decoration: 'lineThrough',
+        },
+      },
+      footer: {
+        columns: [
+          { text: '', width: '*', alignment: 'start' },
+          { text: 'meubanco.com.br', color: 'tomato', alignment: 'center', bold: true},
+          { text: '', width: '*', alignment: 'end' },
+        ],
+      },
     };
-  
   
     pdfMake.createPdf(docDefinition as any).open();
   }
   
   private formatarMoeda(valor: number): string {
-    
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    return valor.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
   }
   
+  
 }
-
-
-
-
