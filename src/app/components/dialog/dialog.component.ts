@@ -57,7 +57,16 @@ export class DialogComponent {
       this.usuarioAtivo = response;
       console.log(this.usuarioAtivo);
       
-    })
+        this.transacao$ = response.transacaos;
+        this.transacao$.forEach((transacao) => {
+          let date = new Date(transacao.createdAt);
+          transacao.day = date.getDate();
+        });
+      });
+
+
+      
+    
     
 
 
@@ -88,5 +97,9 @@ export class DialogComponent {
 
       this.transacao$ = filteredTransactions;
     });
+  }
+
+  teste() {
+    window.print();
   }
 }

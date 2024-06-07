@@ -8,6 +8,8 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { EsqueciSenhaComponent } from './pages/esqueci-senha/esqueci-senha.component';
 import { AlterarRoleComponent } from './pages/alterar-role/alterar-role.component';
 import { FaturaComponent } from './pages/fatura/fatura.component';
+import { ImpressaoComponent } from './pages/impressao/impressao.component';
+import { FaturapdfComponent } from './components/faturapdf/faturapdf.component';
 
 export const routes: Routes = [
 
@@ -46,6 +48,14 @@ export const routes: Routes = [
     {
         path: "fatura",
         component: FaturaComponent
+    },
+    {
+        path: 'imprimir-fatura',
+        component: ImpressaoComponent
+    },
+    {
+        path: 'teste',
+        component: FaturapdfComponent
     }
 
 ];

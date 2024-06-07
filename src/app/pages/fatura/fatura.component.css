@@ -24,7 +24,7 @@
   }
   
   .transaction-table {
-    width: 63%;
+    width: 90%;
     border-collapse: collapse;
   }
   
@@ -47,4 +47,77 @@
     color: red;
   }
 
- 
+
+  
+
+  .print-body {
+    font-family: Arial, sans-serif;
+    color: #f80202;
+    background-color: #000000;
+  }
+  
+  .print-body table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .print-body th, .print-body td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .print-body th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  @media print {
+    body {
+      font-family: Arial, sans-serif;
+      color: #ff0909;
+      background-color: #fff;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+  
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+  
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #4CAF50;
+      color: white;
+    }
+  }
+
+  /* #fatura {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    
+  } */
+
+  .title {
+    color: orangered;
+    font-size: 30px;
+    text-decoration:line-through;
+}
+
+.banco, .title {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 50px;
+}

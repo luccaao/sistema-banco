@@ -1,5 +1,5 @@
-<mat-card style=" margin-top: 50px; display: flex; justify-content: center; align-items: center; height: 80%; box-shadow: none;">
-    <mat-card  style="width: 100%; padding-bottom: 50px;">
+<mat-card style="height: 100%; margin-top: 50px; display: flex; justify-content: center; align-items: center; height: 80%; box-shadow: none;">
+    <mat-card  style="width: 100%; height: 100%;">
         
             <h1 style="text-align: center; margin-bottom: 5%;color: rgb(153, 152, 152); font-weight: bold;">Resumo das faturas de <span style="font-weight: bold; color: tomato; font-size: 35px;">{{this.usuarioAtivo.username}}</span></h1>
             <mat-card-content style="width: 100%; display: flex; flex-direction: column; align-items: center;">
@@ -36,6 +36,7 @@
                   </table>
         </div>
         </mat-card-content>
+        <button (click)="teste()" mat-raised-button style="width: 35%; align-self: center; margin-top: 3%;">IMPRIMIR FATURA</button>
     </mat-card>
     
     </mat-card>

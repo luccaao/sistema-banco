@@ -1,4 +1,5 @@
-<mat-card style=" margin-top: 50px; display: flex; justify-content: center; align-items: center; height: 80%; box-shadow: none;">
+
+<mat-card  style=" margin-top: 100px; display: flex; justify-content: center; align-items: center; height: 80%; box-shadow: none;">
 <mat-card  style="width: 100%; padding-bottom: 50px;">
     
         <h1 style="text-align: center; margin-bottom: 5%;color: rgb(153, 152, 152); font-weight: bold;">Resumo das suas <span style="font-weight: bold; color: tomato; font-size: 35px;">faturas!</span></h1>
@@ -13,8 +14,8 @@
             <span class="total-value">Total: {{ totalValue | currency:"BRL" }}</span>
           </div>
     
-          <div class="table-container">
-            <table class="transaction-table">
+          <div  class="table-container">
+            <table id="fatura"  class="transaction-table">
                 <thead>
                   <tr class="table-header">
                     <th class="table-cell">Data</th>
@@ -30,12 +31,16 @@
                       'transaction-withdrawal': transacao.tipo === 'SAQUE',
                       'transaction-transfer': transacao.tipo === 'TRANSFERÊNCIA'
                     }">{{ transacao.tipo }}</td>
+                    <td class="table-cell" style="font-weight: bold;">{{transacao.valor | currency:'BRL'}}</td>
                     
                   </tr>
                 </tbody>
               </table>
     </div>
-    </mat-card-content>
+    <button (click)="export()"  mat-raised-button style="margin-top: 3%;">IMPRIMIR FATURA</button>
+
+  </mat-card-content>
+  <div class="banco">Meu <span class="title">banco</span></div>
 </mat-card>
 
 </mat-card>

@@ -68,6 +68,8 @@ button{
 
 mat-toolbar{
     display: flex;
-    z-index: 999;
+    
+   
+    z-index: 1;
     justify-content: space-around;
 }
